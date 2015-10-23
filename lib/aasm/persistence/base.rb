@@ -69,7 +69,8 @@ module AASM
             end
           end
         elsif @klass.ancestors.map {|klass| klass.to_s}.include?("Mongoid::Document")
-          scope_options = lambda { @klass.send(:where, {@klass.aasm(@name).attribute_name.to_sym => name.to_s}) }
+          aasm_klass = @klass
+          scope_options = lambda { aasm_klass.send(:where, {aasm_klass.aasm(@name).attribute_name.to_sym => name.to_s}) }
           @klass.send(:scope, name, scope_options)
         elsif @klass.ancestors.map {|klass| klass.to_s}.include?("MongoMapper::Document")
           conditions = { @klass.aasm(@name).attribute_name.to_sym => name.to_s }

@@ -1,3 +1,5 @@
+Mongo::Logger.logger.level = Logger::WARN if defined? Mongo
+
 describe 'mongoid' do
   begin
     require 'mongoid'
